@@ -1,4 +1,4 @@
-#![allow(unused)]
+#![allow(unused, deprecated)]
 
 use clap::{Parser, SubCommand, Subcommand, Args,clap_derive, clap_app};
 use std::{fs, io::Write, any::Any};
@@ -54,14 +54,16 @@ def index():
     let pg = ProgressBar::new(100);
     for _ in 0..100{
       pg.inc(1);
-      thread::sleep_ms(30)
+      thread::sleep_ms(28)
     }
-    println!("Creating Flask App");
+    pg.finish_and_clear();
+    //println!("Creating Flask App");
     let path = Path::new(&args.app_name);
     let app = set_current_dir(path);
     // println!("{:?}", result);
     let result = Command::new("git").args(["init"]).output();
-    println!("{:?}", result);
+    // 
     let result = Command::new("code").args(["."]).output();
+    println!("Created Flask App 🏁")
   }
 }
