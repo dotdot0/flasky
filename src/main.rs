@@ -1,14 +1,30 @@
 #![allow(unused)]
 
-use clap::Parser;
+use clap::{Parser, SubCommand, Subcommand, Args,clap_derive, clap_app};
 use std::{fs, io::Write, any::Any};
 use std::path::Path;
+use std::env::set_current_dir;
+use std::{thread, time::Duration};
+use std::process::Command;
+use indicatif::ProgressBar;
 
-
-#[derive(Parser)]
+#[derive(Parser,Default)]
 struct Cli{
   ///Name of the app
-  app_name: String 
+  app_name: String,
+  #[clap(short='g', long)]
+  ///Initialize Git Repo
+  git: bool
+}
+
+#[derive(Debug,Subcommand)]
+enum Git{
+  GitInitialize(GitInitialize)
+}
+
+#[derive(Debug,Args)]
+struct GitInitialize{
+  option: bool
 }
 
 fn main(){
@@ -32,4 +48,20 @@ def index():
   "#.as_bytes();
 
   file.write(buf);
+
+  if args.git{
+    thread::sleep(Duration::from_millis(3000));
+    let pg = ProgressBar::new(100);
+    for _ in 0..100{
+      pg.inc(1);
+      thread::sleep_ms(30)
+    }
+    println!("Creating Flask App");
+    let path = Path::new(&args.app_name);
+    let app = set_current_dir(path);
+    // println!("{:?}", result);
+    let result = Command::new("git").args(["init"]).output();
+    println!("{:?}", result);
+    let result = Command::new("code").args(["."]).output();
+  }
 }

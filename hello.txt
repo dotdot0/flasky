@@ -1,3 +1,0 @@
-My name is pratush
-My age is 17
-I am a rustacean
