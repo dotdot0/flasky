@@ -8,7 +8,7 @@ use std::path::Path;
 #[derive(Parser)]
 struct Cli{
   ///Name of the app
-  app_name: String
+  app_name: String 
 }
 
 fn main(){
