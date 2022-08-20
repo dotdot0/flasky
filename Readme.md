@@ -1,1 +1,1 @@
-Create BoilerPlate Code For A New Flask App and more.s
+Create BoilerPlate Code For A New Flask App and more.
