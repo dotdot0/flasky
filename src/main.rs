@@ -54,34 +54,27 @@ def index():
   file.write(buf);
 
   if args.git{
-    thread::sleep(Duration::from_millis(3000));
-    let pg = ProgressBar::new(100);
+    progress_bar();
 
-    for _ in 0..100{
-      pg.inc(1);
-      thread::sleep_ms(28)
-    }
-
-    pg.finish_and_clear();
     
-    let path = Path::new(&args.app_name);
-    
-    let app = set_current_dir(path);
     
     let result = Command::new("git").args(["init"]).output();
      
-    println!("Created Flask App 🏁")
   }
 
   if args.code{
+    progress_bar();
 
     let result = Command::new("code").args(["."]).output();
   }
 
   if args.templates{
+    progress_bar();
+
     let template = fs::create_dir("templates").unwrap();
     thread::sleep(Duration::from_millis(500));
-    let mut file = fs::File::create(format!("{}/templates/home.html", &args.app_name)).expect("Unable To Create File");
+    let mut file = fs::File::create("templates/home.html").expect("Unable To Create File");
+
     let html: &[u8] = r#"
 <!DOCTYPE html>
 <html>
@@ -93,5 +86,28 @@ def index():
     </body>
 </html>
     "#.as_bytes();
-  } 
+
+  file.write(html);
+  };
+}
+
+fn progress_bar(){
+    let args = Cli::parse();
+
+    thread::sleep(Duration::from_millis(3000));
+    let pg = ProgressBar::new(100);
+
+    for _ in 0..100{
+      pg.inc(1);
+      thread::sleep_ms(28)
+    }
+
+    pg.finish_and_clear();
+
+    let path = Path::new(&args.app_name);
+    
+    let app = set_current_dir(path);
+
+
+    println!("Created Flask App 🏁")
 }
