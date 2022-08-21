@@ -54,9 +54,7 @@ def index():
   file.write(buf);
 
   if args.git{
-    progress_bar();
-
-    
+    progress_bar();  
     
     let result = Command::new("git").args(["init"]).output();
      
