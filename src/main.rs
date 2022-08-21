@@ -6,7 +6,7 @@ use std::path::Path;
 use std::env::set_current_dir;
 use std::{thread, time::Duration};
 use std::process::Command;
-use indicatif::ProgressBar;
+use indicatif::{ProgressBar, ProgressStyle};
 
 #[derive(Parser,Default)]
 struct Cli{
@@ -14,7 +14,11 @@ struct Cli{
   app_name: String,
   #[clap(short='g', long)]
   ///Initialize Git Repo
-  git: bool
+  git: bool,
+  #[clap(short='c', long)]
+  code: bool,
+  #[clap(short='t', long)]
+  templates: bool
 }
 
 #[derive(Debug,Subcommand)]
@@ -52,18 +56,42 @@ def index():
   if args.git{
     thread::sleep(Duration::from_millis(3000));
     let pg = ProgressBar::new(100);
+
     for _ in 0..100{
       pg.inc(1);
       thread::sleep_ms(28)
     }
+
     pg.finish_and_clear();
-    //println!("Creating Flask App");
+    
     let path = Path::new(&args.app_name);
+    
     let app = set_current_dir(path);
-    // println!("{:?}", result);
+    
     let result = Command::new("git").args(["init"]).output();
-    // 
-    let result = Command::new("code").args(["."]).output();
+     
     println!("Created Flask App 🏁")
   }
+
+  if args.code{
+
+    let result = Command::new("code").args(["."]).output();
+  }
+
+  if args.templates{
+    let template = fs::create_dir("templates").unwrap();
+    thread::sleep(Duration::from_millis(500));
+    let mut file = fs::File::create(format!("{}/templates/home.html", &args.app_name)).expect("Unable To Create File");
+    let html: &[u8] = r#"
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flasky</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+    </body>
+</html>
+    "#.as_bytes();
+  } 
 }
