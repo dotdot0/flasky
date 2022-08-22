@@ -1,6 +1,6 @@
 [package]
 name = "flasky"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Pratush Rai"]
 edition = "2021"
 description = "Create boilerplate code for a new flask app"
