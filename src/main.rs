@@ -7,6 +7,8 @@ use std::env::set_current_dir;
 use std::{thread, time::Duration};
 use std::process::Command;
 use indicatif::{ProgressBar, ProgressStyle};
+use ansi_term::Colour::{Blue, Yellow};
+use kdam::prelude::*;
 
 #[derive(Parser,Default)]
 struct Cli{
@@ -106,6 +108,9 @@ fn progress_bar(){
 
     thread::sleep(Duration::from_millis(3000));
     let pg = ProgressBar::new(100);
+    pg.set_style(ProgressStyle::with_template("{spinner:.green} [{elapsed_precise}] [{wide_bar:.cyan/blue}] ({eta})")
+        .unwrap()
+        .progress_chars("#>-"));
 
     for _ in 0..100{
       pg.inc(1);
@@ -119,5 +124,5 @@ fn progress_bar(){
     let app = set_current_dir(path);
 
 
-    println!("Created Flask App 🏁")
+    println!("{}", Blue.bold().paint("Created Flask App 🏁").to_string())
 }
