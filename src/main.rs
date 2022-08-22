@@ -20,7 +20,9 @@ struct Cli{
   code: bool,
   #[clap(short='t', long)]
   ///Create the jinja2 templates directory
-  templates: bool
+  templates: bool,
+  //#[clap(short='n', long)]
+  //nvim: bool
 }
 
 #[derive(Debug,Subcommand)]
@@ -55,21 +57,21 @@ def index():
 
   file.write(buf);
 
+
+  progress_bar();
+
   if args.git{
-    progress_bar();  
     
     let result = Command::new("git").args(["init"]).output();
      
   }
 
   if args.code{
-    progress_bar();
 
     let result = Command::new("code").args(["."]).output();
   }
 
   if args.templates{
-    progress_bar();
 
     let template = fs::create_dir("templates").unwrap();
     thread::sleep(Duration::from_millis(500));
@@ -88,7 +90,11 @@ def index():
     "#.as_bytes();
 
   file.write(html);
-  };
+  }
+
+  //if args.nvim{
+    //let result = Command::new("nvim").args(args).output();
+  //}
 }
 
 fn progress_bar(){
