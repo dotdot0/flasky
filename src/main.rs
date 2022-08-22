@@ -8,7 +8,6 @@ use std::{thread, time::Duration};
 use std::process::Command;
 use indicatif::{ProgressBar, ProgressStyle};
 use ansi_term::Colour::{Blue, Yellow};
-use kdam::prelude::*;
 
 #[derive(Parser,Default)]
 struct Cli{
