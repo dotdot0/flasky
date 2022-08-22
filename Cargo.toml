@@ -5,6 +5,7 @@ authors = ["Pratush Rai"]
 edition = "2021"
 description = "Create boilerplate code for a new flask app"
 license = "MIT"
+repository = "https://github.com/pratushrai0309/flasky"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
