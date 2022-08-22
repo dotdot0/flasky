@@ -15,7 +15,6 @@ categories = ["command-line-interface"]
 ansi_term = "0.12.1"
 clap = { version = "3.1.6", features = ["derive"] }
 indicatif = "0.17.0"
-kdam = "0.2.3"
 
 [profile.dev]
 opt-level = 0
