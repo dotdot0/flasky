@@ -7,7 +7,7 @@ Create boilerplate code for a new flask app and more..
 ```
 
 ## USAGE:
-    flasky [options]
+    flasky [options] <APP_NAME>
 
 ## EXAMPLE
 ```
