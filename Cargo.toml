@@ -3,6 +3,8 @@ name = "flasky"
 version = "0.1.0"
 authors = ["Pratush Rai"]
 edition = "2021"
+description = "Create boilerplate code for a new flask app"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
