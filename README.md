@@ -2,22 +2,22 @@
 Create boilerplate code for a new flask app and more..
 
 ## INSTALLATION 
-'''
+```
     cargo install flasky
-'''
+```
 
 ## USAGE:
     flasky [options]
 
 ## EXAMPLE
-'''
+```
     flasky hello --git --code --templates
-'''
+```
 
 ## Output
-'''
+```
     Created Flask App 🏁
-'''
+```
 
 ## FLAGS:
     -c, --code         Open the project in visual studio code
