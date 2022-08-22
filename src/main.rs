@@ -10,14 +10,18 @@ use indicatif::{ProgressBar, ProgressStyle};
 
 #[derive(Parser,Default)]
 struct Cli{
+
   ///Name of the app
   app_name: String,
   #[clap(short='g', long)]
+
   ///Initialize Git Repo
   git: bool,
+
   #[clap(short='c', long)]
   ///Open the project in visual studio code
   code: bool,
+
   #[clap(short='t', long)]
   ///Create the jinja2 templates directory
   templates: bool,
