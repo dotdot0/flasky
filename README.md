@@ -21,6 +21,7 @@ Create boilerplate code for a new flask app and more..
 
 ## FLAGS:
     -h, --help         Print help information
+    -V                 Version
 
 ## OPTIONS:
     -c, --code         Open the project in visual studio code

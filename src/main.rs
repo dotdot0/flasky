@@ -1,16 +1,23 @@
 #![allow(unused, deprecated)]
 
+//mod
+mod progress;
+
+//Use
 use clap::{Parser, SubCommand, Subcommand, Args,clap_derive, clap_app};
+use std::default;
 use std::{fs, io::Write, any::Any};
 use std::path::Path;
-use std::env::set_current_dir;
+use std::env::{set_current_dir, args};
 use std::{thread, time::Duration};
 use std::process::Command;
 use indicatif::{ProgressBar, ProgressStyle};
 use ansi_term::Colour::{Blue, Yellow};
+use progress::progress_bar;
 
-#[derive(Parser,Default)]
-struct Cli{
+#[derive(Parser)]
+#[clap(version, about="Create boilerplate for new flask app and more..")]
+pub struct Cli{
 
   ///Name of the app
   app_name: String,
@@ -26,18 +33,7 @@ struct Cli{
   #[clap(short='t', long)]
   ///Create the jinja2 templates directory
   templates: bool,
-  //#[clap(short='n', long)]
-  //nvim: bool
-}
 
-#[derive(Debug,Subcommand)]
-enum Git{
-  GitInitialize(GitInitialize)
-}
-
-#[derive(Debug,Args)]
-struct GitInitialize{
-  option: bool
 }
 
 fn main(){
@@ -63,10 +59,9 @@ def index():
   file.write(buf);
 
 
-  progress_bar();
+  progress_bar(&args);
 
   if args.git{
-    
     let result = Command::new("git").args(["init"]).output();
      
   }
@@ -102,26 +97,5 @@ def index():
   //}
 }
 
-fn progress_bar(){
-    let args = Cli::parse();
-
-    thread::sleep(Duration::from_millis(3000));
-    let pg = ProgressBar::new(100);
-    pg.set_style(ProgressStyle::with_template("{spinner:.green} [{elapsed_precise}] [{wide_bar:.cyan/blue}] ({eta})")
-        .unwrap()
-        .progress_chars("#>-"));
-
-    for _ in 0..100{
-      pg.inc(1);
-      thread::sleep_ms(28)
-    }
-
-    pg.finish_and_clear();
-
-    let path = Path::new(&args.app_name);
-    
-    let app = set_current_dir(path);
 
 
-    println!("{}", Blue.bold().paint("Created Flask App 🏁").to_string())
-}
